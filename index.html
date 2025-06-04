@@ -67,12 +67,12 @@
 
     <div class="section">
       <h2>1. SNS 사용 습관 평가</h2>
-      <div class="question">1. 하루에 SNS를 3시간 이상 사용하는 날이 자주 있다.<br/>
-        <label><input type="radio" name="b1" value="1" required> 전혀 아니다</label>
-        <label><input type="radio" name="b1" value="2"> 아니다</label>
-        <label><input type="radio" name="b1" value="3"> 보통이다</label>
-        <label><input type="radio" name="b1" value="4"> 그렇다</label>
-        <label><input type="radio" name="b1" value="5"> 매우 그렇다</label>
+      <div class="question">1. 하루의 평균적인 SNS 사용시간<br/>
+        <label><input type="radio" name="b1" value="1" required> 1시간 미만</label>
+        <label><input type="radio" name="b1" value="2"> 1시간 이상 - 3시간 미만</label>
+        <label><input type="radio" name="b1" value="3"> 3시간 이상-5시간 미만 </label>
+        <label><input type="radio" name="b1" value="4"> 5시간 이상-7시간 미만</label>
+        <label><input type="radio" name="b1" value="5">7시간 이상</label>
       </div>
       <div class="question">2. 다른 일을 하면서도 무의식적으로 SNS를 확인하는 편이다.<br/>
         <label><input type="radio" name="b2" value="1" required> 전혀 아니다</label>
@@ -81,7 +81,7 @@
         <label><input type="radio" name="b2" value="4"> 그렇다</label>
         <label><input type="radio" name="b2" value="5"> 매우 그렇다</label>
       </div>
-      <div class="question">3. SNS에 올릴 게시물을 고민하거나 준비하는 데 시간을 많이 쓴다.<br/>
+      <div class="question">3. SNS에 올릴 게시물을 고민하거나 준비하는 데 30분 이상의 시간을 사용한다.<br/>
         <label><input type="radio" name="b3" value="1" required> 전혀 아니다</label>
         <label><input type="radio" name="b3" value="2"> 아니다</label>
         <label><input type="radio" name="b3" value="3"> 보통이다</label>
@@ -134,7 +134,7 @@
         <label><input type="radio" name="e4" value="4"> 그렇다</label>
         <label><input type="radio" name="e4" value="5"> 매우 그렇다</label>
       </div>
-      <div class="question">5. 좋아요나 댓글이 많아도 마음이 공허할 때가 있다.<br/>
+      <div class="question">5. SNS를 통해 긍정적인 피드백이나 호응을 받아도 감정적으로 공허함을 느낄 때가 있다.<br/>
         <label><input type="radio" name="e5" value="1" required> 전혀 아니다</label>
         <label><input type="radio" name="e5" value="2"> 아니다</label>
         <label><input type="radio" name="e5" value="3"> 보통이다</label>
@@ -166,7 +166,7 @@
         <label><input type="radio" name="c3" value="4"> 그렇다</label>
         <label><input type="radio" name="c3" value="5"> 매우 그렇다</label>
       </div>
-      <div class="question">4. 내가 올린 게시물 반응이 적으면 기분이 나빠진다.<br/>
+      <div class="question">4. SNS를 사용하는 동안 쉬지 않고 글을 쓰거나, 댓글을 달거나, 좋아요를 누르는 등의 반복적인 행동을 한다.<br/>
         <label><input type="radio" name="c4" value="1" required> 전혀 아니다</label>
         <label><input type="radio" name="c4" value="2"> 아니다</label>
         <label><input type="radio" name="c4" value="3"> 보통이다</label>
@@ -188,32 +188,35 @@
   <div class="result" id="result"></div>
 
   <script>
-    function calculateTotal() {
-      const form = document.forms['testForm'];
-      let total = 0, behavioral = 0, emotional = 0, comparison = 0;
+  function calculateTotal() {
+  const form = document.forms['testForm'];
+  let total = 0, behavioral = 0, emotional = 0, comparison = 0;
 
-      for (let i = 1; i <= 5; i++) behavioral += parseInt(form['b' + i].value);
-      for (let i = 1; i <= 5; i++) emotional += parseInt(form['e' + i].value);
-      for (let i = 1; i <= 5; i++) comparison += parseInt(form['c' + i].value);
+  for (let i = 1; i <= 5; i++) behavioral += parseInt(form['b' + i].value);
+  for (let i = 1; i <= 5; i++) emotional += parseInt(form['e' + i].value);
+  for (let i = 1; i <= 5; i++) comparison += parseInt(form['c' + i].value);
 
-      total = behavioral + emotional + comparison;
+  total = behavioral + emotional + comparison;
 
-      let feedback = `총점: ${total}점\n\n`;
+  let feedback = `총점: ${total}점\n\n`;
 
-      if (behavioral >= 15) feedback += "- SNS 사용 습관: 과의존 경향 있음\n";
-      if (emotional >= 17) feedback += "- 감정 고립: 정서적 고립 신호 있음\n";
-      if (comparison >= 18) feedback += "- 비교 및 정서 반응: SNS가 정서 건강에 악영향 가능성 있음\n\n";
+  if (behavioral >= 15) {
+    feedback += "- 📱 SNS 사용 습관: SNS에 과의존하는 경향이 있습니다. 일상 속에서 무의식적으로 SNS를 확인하거나, 오랜 시간 사용하는 모습이 자주 나타날 수 있습니다. 이는 집중력 저하, 수면의 질 저하, 현실 대인관계 단절 등으로 이어질 수 있습니다.\n";
+  }
+  if (emotional >= 17) {
+    feedback += "- 💬 감정 고립: 주변 사람들과 연결되어 있음에도 불구하고 감정적으로는 고립감을 느낄 가능성이 높습니다. 진정한 소통이 부족하고, 외로움이나 허무함이 지속될 수 있습니다. 이는 우울감으로도 이어질 수 있으므로 주의가 필요합니다.\n";
+  }
+  if (comparison >= 18) {
+    feedback += "- 🔍 비교 및 정서 반응: 타인의 삶과 자신의 삶을 비교하면서 자신감 저하나 열등감을 자주 느낄 수 있습니다. SNS 속 ‘꾸며진 모습’에 과도하게 영향을 받을 경우, 현실의 자기 모습에 만족하지 못하는 감정 왜곡이 일어날 수 있습니다.\n\n";
+  }
 
-      if (total <= 30) {
-        feedback += "✅ 위험 없음: 사용자의 SNS 활용 습관은 비교적 건강한 편입니다. 감정적 스트레스나 고립의 신호는 낮은 편으로 판단되며, 현재의 사용 방식을 유지하면서 주기적으로 자가 점검을 진행하는 것이 바람직합니다.";
-      } else if (total <= 45) {
-        feedback += "⚠️ 주의 요망: 현재 사용자의 SNS 사용이 정서적 부담이나 스트레스를 유발할 수 있는 수준입니다. 감정 고립이나 비교로 인한 부정적 영향을 줄이기 위해 사용 시간을 조절하거나 디지털 디톡스를 시도해보시는 것이 좋습니다.";
-      } else {
-        feedback += "🚨 고위험: 현재 사용자의 SNS 사용이 전반적인 정서적 웰빙에 심각한 영향을 미치고 있을 가능성이 높습니다. 감정 고립, 타인과의 비교, SNS 의존 경향이 복합적으로 나타날 수 있으므로, SNS 사용을 잠시 중단하고 전문가와의 상담이나 오프라인 활동 확대를 적극 고려해보시는 것이 필요합니다.";
-      }
+  if (total <= 30) {
+    feedback += "✅ **위험 없음**\n현재 사용자의 SNS 활용 습관은 비교적 건강한 편입니다. 감정 고립이나 과도한 비교 경향이 낮으며, 자기 조절력이 있는 상태로 보입니다. 다만, 주기적인 자가 점검을 통해 사용 습관을 점검하고, 오프라인 활동을 꾸준히 유지하는 것이 좋습니다.";
+  } else if (total <= 45) {
+    feedback += "⚠️ **주의 요망**\n현재 SNS 사용이 정서적 부담이나 스트레스를 유발할 가능성이 있습니다. 무의식적인 사용 습관, 감정적 고립감, 타인과의 비교가 복합적으로 작용할 수 있습니다.\n\n✅ **해결 방법**:\n- 하루 중 SNS 사용 시간을 정해놓고 사용하기\n- 하루 10~30분의 '디지털 디톡스' 시간 마련하기\n- SNS 이외의 활동(산책, 독서, 대화 등)으로 감정 균형 찾기\n- SNS에서 부정적 감정을 유발하는 계정은 팔로우 해제하는 것도 도움이 됩니다.";
+  } else {
+    feedback += "🚨 **고위험 상태**\n현재 SNS 사용이 정서적 웰빙에 심각한 영향을 미칠 가능성이 높습니다.\n\n🔴 **왜 고위험인가요?**\n- SNS 사용 습관이 일상생활을 방해할 정도로 자리잡고 있고\n- 진정한 감정 소통이 부족하여 외로움이 심화되며\n- 타인과의 비교로 인해 자존감이 지속적으로 저하되고 있습니다.\n\n🧠 **가능한 증상**:\n- 수면 부족, 집중력 저하\n- 자기비하 또는 무기력감\n- 감정 표현의 위축\n- 주변 인간관계의 단절감\n\n✅ **해결 방법**:\n- SNS 앱을 일정 시간 강제로 차단하는 도구 활용\n- 나를 있는 그대로 수용할 수 있는 오프라인 모임 또는 상담 참여\n- 감정을 글이나 말로 표현해 보는 정서 일기 시도\n- 필요 시, 심리상담 전문가와의 상담을 권장드립니다.";
+  }
 
-      document.getElementById("result").textContent = feedback;
-    }
-  </script>
-</body>
-</html>
+  document.getElementById("result").textContent = feedback;
+}
