@@ -44,11 +44,23 @@
         background-color: #2980b9;
     }
     .result {
-        background: #e8f4fd;
-        padding: 15px;
-        border-radius: 8px;
-        border-left: 5px solid #3498db;
-    }
+    background #e8f4fd;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 5px solid #3498db;
+    font-size: 1rem;
+    line-height: 1.8;
+    text-align: left;
+  }
+  .result strong {
+    color: #2c3e50;
+  }
+  .result span.title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    display: block;
+    margin-top: 15px;
+  }
     body {
         text-align: center; font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: auto; }
     h1, h2 { text-align: center; }
@@ -188,7 +200,7 @@
   <div class="result" id="result"></div>
 
   <script>
-  function calculateTotal() {
+function calculateTotal() {
   const form = document.forms['testForm'];
   let total = 0, behavioral = 0, emotional = 0, comparison = 0;
 
@@ -198,28 +210,37 @@
 
   total = behavioral + emotional + comparison;
 
-  let feedback = `총점: ${total}점\n\n`;
+  let feedback = `<strong>총점: ${total}점</strong><br><br>`;
 
   if (behavioral >= 15) {
-    feedback += "- 📱 SNS 사용 습관: SNS에 과의존하는 경향이 있습니다. 일상 속에서 무의식적으로 SNS를 확인하거나, 오랜 시간 사용하는 모습이 자주 나타날 수 있습니다. 이는 집중력 저하, 수면의 질 저하, 현실 대인관계 단절 등으로 이어질 수 있습니다.\n";
+    feedback += `<span class="title">📱 SNS 사용 습관</span>무의식적으로 SNS를 자주 확인하거나, 오랜 시간 사용하는 경향이 나타납니다.<br>이는 <strong>집중력 저하, 수면 장애, 현실 대인관계 단절</strong>로 이어질 수 있습니다.<br><br>`;
   }
   if (emotional >= 17) {
-    feedback += "- 💬 감정 고립: 주변 사람들과 연결되어 있음에도 불구하고 감정적으로는 고립감을 느낄 가능성이 높습니다. 진정한 소통이 부족하고, 외로움이나 허무함이 지속될 수 있습니다. 이는 우울감으로도 이어질 수 있으므로 주의가 필요합니다.\n";
+    feedback += `<span class="title">💬 감정 고립</span>연결되어 있음에도 <strong>정서적 외로움이나 허무함</strong>을 느낄 수 있으며, <strong>우울감</strong>으로 발전할 수 있습니다.<br><br>`;
   }
   if (comparison >= 18) {
-    feedback += "- 🔍 비교 및 정서 반응: 타인의 삶과 자신의 삶을 비교하면서 자신감 저하나 열등감을 자주 느낄 수 있습니다. SNS 속 ‘꾸며진 모습’에 과도하게 영향을 받을 경우, 현실의 자기 모습에 만족하지 못하는 감정 왜곡이 일어날 수 있습니다.\n\n";
+    feedback += `<span class="title">🔍 비교 및 정서 반응</span>타인과 자신을 비교하며 <strong>자존감 저하</strong> 및 <strong>열등감</strong>이 반복될 수 있습니다.<br>SNS의 '꾸며진 모습'에 영향을 많이 받을 경우, <strong>현실의 자기 모습에 불만족</strong>이 생기기도 합니다.<br><br>`;
   }
 
   if (total <= 30) {
-    feedback += "✅ 위험 없음\n현재 사용자의 SNS 활용 습관은 비교적 건강한 편입니다. 감정 고립이나 과도한 비교 경향이 낮으며, 자기 조절력이 있는 상태로 보입니다. 다만, 주기적인 자가 점검을 통해 사용 습관을 점검하고, 오프라인 활동을 꾸준히 유지하는 것이 좋습니다.";
+    feedback += `<span class="title">✅ 위험 없음</span>현재 SNS 사용 습관은 건강한 편입니다.<br>정기적인 점검과 오프라인 활동 유지로 좋은 상태를 유지해 주세요.`;
   } else if (total <= 45) {
-    feedback += "⚠️ 주의 요망\n현재 SNS 사용이 정서적 부담이나 스트레스를 유발할 가능성이 있습니다. 무의식적인 사용 습관, 감정적 고립감, 타인과의 비교가 복합적으로 작용할 수 있습니다.\n\n해결 방법:\n- 하루 중 SNS 사용 시간을 정해놓고 사용하기\n- 하루 10~30분의 '디지털 디톡스' 시간 마련하기\n- SNS 이외의 활동(산책, 독서, 대화 등)으로 감정 균형 찾기\n- SNS에서 부정적 감정을 유발하는 계정은 팔로우 해제하는 것도 도움이 됩니다.";
+    feedback += `<span class="title">⚠️ 주의 요망</span>SNS 사용이 정서적 스트레스를 유발할 수 있습니다.<br>
+    <strong>추천 방법:</strong><br>
+    - SNS 사용 시간 정해두기<br>
+    - 하루 10~30분 디지털 디톡스 실천<br>
+    - SNS 이외의 활동(산책, 대화 등) 병행<br>
+    - 부정적 영향을 주는 계정 언팔로우`;
   } else {
-    feedback += "🚨 고위험 상태\n현재 SNS 사용이 정서적 웰빙에 심각한 영향을 미칠 가능성이 높습니다.\n\n🔴 왜 고위험인가요?\n- SNS 사용 습관이 일상생활을 방해할 정도로 자리잡고 있고\n- 진정한 감정 소통이 부족하여 외로움이 심화되며\n- 타인과의 비교로 인해 자존감이 지속적으로 저하되고 있습니다.\n\n🧠 가능한 증상:\n- 수면 부족, 집중력 저하\n- 자기비하 또는 무기력감\n- 감정 표현의 위축\n- 주변 인간관계의 단절감\n\n✅ 해결 방법:\n- SNS 앱을 일정 시간 강제로 차단하는 도구 활용\n- 나를 있는 그대로 수용할 수 있는 오프라인 모임 또는 상담 참여\n- 감정을 글이나 말로 표현해 보는 정서 일기 시도\n- 필요 시, 심리상담 전문가와의 상담을 권장드립니다.";
+    feedback += `<span class="title">🚨 고위험 상태</span>SNS가 <strong>정서적 웰빙에 부정적 영향을 미치고</strong> 있으며,<br> <strong>집중력 저하, 감정 위축, 자존감 저하</strong> 등이 나타날 수 있습니다.<br><br>
+    <strong>대처법:</strong><br>
+    - SNS 강제 차단 앱 사용<br>
+    - 감정 일기 쓰기<br>
+    - 오프라인 모임 또는 심리상담 참여 권장`;
   }
 
-   document.getElementById("result").textContent = feedback;
-    }
-  </script>
+  document.getElementById("result").innerHTML = feedback;
+}
+</script>
 </body>
 </html>
