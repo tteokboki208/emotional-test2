@@ -218,4 +218,8 @@
     feedback += "🚨 고위험 상태\n현재 SNS 사용이 정서적 웰빙에 심각한 영향을 미칠 가능성이 높습니다.\n\n🔴 왜 고위험인가요?\n- SNS 사용 습관이 일상생활을 방해할 정도로 자리잡고 있고\n- 진정한 감정 소통이 부족하여 외로움이 심화되며\n- 타인과의 비교로 인해 자존감이 지속적으로 저하되고 있습니다.\n\n🧠 가능한 증상:\n- 수면 부족, 집중력 저하\n- 자기비하 또는 무기력감\n- 감정 표현의 위축\n- 주변 인간관계의 단절감\n\n✅ 해결 방법:\n- SNS 앱을 일정 시간 강제로 차단하는 도구 활용\n- 나를 있는 그대로 수용할 수 있는 오프라인 모임 또는 상담 참여\n- 감정을 글이나 말로 표현해 보는 정서 일기 시도\n- 필요 시, 심리상담 전문가와의 상담을 권장드립니다.";
   }
 
-  document.getElementById("result").innerHTML = feedback.replace(/\n/g, "<br>");
+   document.getElementById("result").textContent = feedback;
+    }
+  </script>
+</body>
+</html>
